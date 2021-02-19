@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Editor</title>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+            
+        <style>
+            ul { color: white; list-style-type:none}
+            li{float: left;}
+            
+            .palette{
+                width:95%;
+                margin: auto;
+                height: 1400px;
+                margin: auto;
+                background-color:black;
+                color: aqua;
+                padding: 10px;
+                overflow:hidden;
+            }
+            body{
+                background-image: url("https://www.imore.com/sites/imore.com/files/styles/large/public/field/image/2020/12/monster-hunter-rise-rampage.jpg");
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+            .head{
+                width:90%;
+                height:40%;
+                border: 2px solid black;
+                margin: auto;
+                text-align: center;
+                border: 5px solid red;
+                margin-bottom: 50px;
+                
+
+            }
+            .flexx{
+                display: flex;
+                margin: auto;
+                width:90%;
+            }
+            .board{
+                width:90%;
+                height:50%;
+                margin:auto;
+                text-align: center;
+                border: 5px solid red; 
+                height: 50%;
+            }
+            #Head{      
+                width: 22%;
+                border: 5px solid yellow;
+                margin:10px;
+           
+            }
+            #Body{
+                width: 22%;
+                border: 5px solid yellow;
+                margin:10px;
+            
+
+            }
+            #Hands{
+                width: 22%;
+                border: 5px solid yellow;
+                margin:10px;
+               
+
+            }
+            #Foots{
+                width: 22%;
+                border: 5px solid yellow;
+                margin:10px;
+                padding: 10px;
+                
+
+            }
+            button{
+                margin: 10px;
+                position:relative;          
+                left:50%;
+            }
+            button :hover{
+                cursor:pointer;
+            }
+            img {
+                width: 100px;
+                height: 100px;
+                
+                }
+            img:hover{
+                cursor: pointer;
+            }
+            </style>
+            
+
+       
+   
+    </head>
+    <body>
+        <div class="palette">
+            <div class="head">
+                <h2>Monster Palette</h2><br>
+            <div class="flexx">
+                
+                <div id="Head">
+                    <h2>HEAD</h2><br>
+                <ul>
+                <li><img src="head1.jpg" onclick="Saving(this)"></li>
+                <li><img src="head2.jpg" onclick="Saving(this)"></li>
+                <li><img src="head3.jpg" onclick="Saving(this)"></li>
+                </ul>
+                </div>
+                <div id="Body">
+                    <h2>BODY</h2><br>
+                <ul>
+                <li><img src="body1.PNG" onclick="Saving(this)"></li>
+                <li><img src="body2.PNG" onclick="Saving(this)"></li>
+                </ul>
+                </div>
+                <div id="Hands">
+                    <h2>HANDS</h2><br>
+                 <ul>
+                    
+                <li><img src="hand1L.png" onclick="Saving(this)"></li>
+                <li><img src="hand1R.png" onclick="Saving(this)"></li>
+                <li><img src="hand2L.png" onclick="Saving(this)"></li>
+                <li><img src="hand2R.png" onclick="Saving(this)"></li>
+                <li><img src="hand3L.png" onclick="Saving(this)"></li>
+                <li><img src="hand3R.png" onclick="Saving(this)"></li>       
+                </ul>
+                </div>
+                <div id="Foots">
+                    <h2>LEGS</h2><br>
+                <ul>
+                <li><img src="feet1L.png" onclick="Saving(this)"></li>
+                <li><img src="feet1R.png" onclick="Saving(this)"></li> 
+                <li><img src="feet2L.png" onclick="Saving(this)"></li>
+                <li><img src="feet2R.png" onclick="Saving(this)"></li>
+                <li><img src="feet3L.png" onclick="Saving(this)"></li>           
+                <li><img src="feet3R.png" onclick="Saving(this)"></li>
+                </ul>
+                </div>
+            </div>
+                
+            </div>
+            <div class="board">
+                <h2>Drawing Area</h2>
+            </div>
+            <button type="button" onclick="FinalSaving()" >Save</button>
+            <button type="button" onclick="PerlSubmit()">Submit</button>
+        </div>
+        
+        <script>
+            var arr=[];
+            function Saving(e){
+                console.log(e.getBoundingClientRect());
+                //arr.push(e.getBoundingClientRect()); 
+                const { x,y } = e.getBoundingClientRect();
+                var id1=e.getAttribute("src");
+                var obj={"id":[id1],"coordinates":[x,y]}
+                var flag=-1
+                for (i=0;i<arr.length;i++){
+                    var {id}=arr[i]
+                    if(id==id1)
+                        flag=i
+                }
+                if(flag!=-1){           
+                    arr[flag]=obj;
+                }
+                else{
+                    arr.push(obj); 
+                }
+            }
+            
+            function FinalSaving(){
+                console.log(arr);
+            }
+            function PerlSubmit() {
+                final={"design_id":["su"],"images":arr}
+                final1={"monster":[final]}
+                console.log(final)
+                $.ajax({
+                    type: 'POST',
+                    url: 'code.pl',
+                    data: {"r":JSON.stringify(final1)},
+                    success: function(res) {
+
+alert(res);
+
+},
+error: function() {alert("did not work");}
+                    
+                }).done(function (data) {
+                    console.log("DD")
+                }).fail(function (jqXHR, textStatus, error) {
+    // Handle error here
+   console.log(error)
+});
+                }
+        $(function() {
+            var myElement = document.getElementsByClassName("palette");
+            console.log(myElement)
+            $( "ul li" ).draggable({containment: myElement});
+        });
+        </script>
+       
+    </body>
+</html>
