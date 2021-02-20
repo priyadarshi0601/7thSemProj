@@ -77,10 +77,15 @@
                 
 
             }
+            #footer{
+                text-align: center;
+                width: 30%;
+                margin: auto;
+                display: flex;
+                margin-top: 15px;
+            }
             button{
                 margin: 10px;
-                position:relative;          
-                left:50%;
             }
             button :hover{
                 cursor:pointer;
@@ -149,37 +154,56 @@
             <div class="board">
                 <h2>Drawing Area</h2>
             </div>
+            <div id="footer">
+            <label>Enter the design Name</label>
+            <input type="text" id="Design_Name"></input>
             <button type="button" onclick="FinalSaving()" >Save</button>
             <button type="button" onclick="PerlSubmit()">Submit</button>
+            </div>
         </div>
         
         <script>
             var arr=[];
+            var Dname='ll';
             function Saving(e){
-                console.log(e.getBoundingClientRect());
+                var b=document.body.getElementsByClassName("board")[0];
+                var x1=b.getBoundingClientRect().left;
+                var y1=b.getBoundingClientRect().top;
                 //arr.push(e.getBoundingClientRect()); 
                 const { x,y } = e.getBoundingClientRect();
                 var id1=e.getAttribute("src");
-                var obj={"id":[id1],"coordinates":[x,y]}
+                var obj={"id":[id1],"coordinates":[x-x1,y-y1]}
+                console.log(obj)
                 var flag=-1
                 for (i=0;i<arr.length;i++){
                     var {id}=arr[i]
                     if(id==id1)
                         flag=i
                 }
-                if(flag!=-1){           
-                    arr[flag]=obj;
+                if(flag!=-1){  
+                    if(obj.coordinates[0]>10 && obj.coordinates[1]>10){         
+                        arr[flag]=obj;
+                    }
+                    else{
+                        arr.splice(flag, 1);
+                    }
                 }
                 else{
-                    arr.push(obj); 
+
+                    if(obj.coordinates[0]>10 && obj.coordinates[1]>10){         
+                        arr.push(obj);
+                    }                
                 }
+
             }
             
             function FinalSaving(){
                 console.log(arr);
+                Dname= document.getElementById("Design_Name").value;
+                console.log(Dname);
             }
             function PerlSubmit() {
-                final={"design_id":["su"],"images":arr}
+                final={"design_id":[Dname],"images":arr}
                 final1={"monster":[final]}
                 console.log(final)
                 $.ajax({
@@ -188,18 +212,17 @@
                     data: {"r":JSON.stringify(final1)},
                     success: function(res) {
 
-alert(res);
+                        alert(res);
 
-},
-error: function() {alert("did not work");}
-                    
+                },
+                error: function() {alert("did not work");}                  
                 }).done(function (data) {
                     console.log("DD")
                 }).fail(function (jqXHR, textStatus, error) {
-    // Handle error here
-   console.log(error)
-});
-                }
+                // Handle error here
+                console.log(error)
+                });
+            }
         $(function() {
             var myElement = document.getElementsByClassName("palette");
             console.log(myElement)

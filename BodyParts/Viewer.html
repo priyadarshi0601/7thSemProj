@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+    <head>
+        
+        <title></title>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+        <style>
+            body{
+                background-image: url('https://www.intofilm.org/intofilm-production/3755/scaledcropped/1096x548/resources/3755/a-monster-calls-ep-apaches-entertainment.jpg');
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+            img{
+                width:100px;
+                height:100px;
+                display: none;
+                
+            }
+            li{
+                list-style-type: none;
+            }
+            #viewer{
+                width:900px;
+                height:900px;
+                margin:auto;
+                text-align: center;
+                border: 5px solid red; 
+                background-color: black;
+                color: aqua;
+            }
+            #ff{
+                width: auto;
+                height: auto;
+                text-align: center;
+                background-color: blue;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="ff">
+            <label for="name">Design Name</label><br>
+            <input type="text" id="dname" name="dname"><br>
+            <button type="button" onclick="func1()">Submit</button>
+        </div>
+        <ul>
+            <li><img src="head1.jpg"  id="head1"></li>
+            <li><img src="head2.jpg"  id="head2"></li>
+            <li><img src="head3.jpg"  id="head3"></li>
+            <li><img src="body1.PNG"  id="body1"></li>
+            <li><img src="body2.PNG"  id="body2"></li>
+            <li><img src="hand1L.png" id="hand1L" ></li>
+            <li><img src="hand1R.png" id="hand1R" ></li>
+            <li><img src="hand2L.png" id="hand2L" ></li>
+            <li><img src="hand2R.png" id="hand2R" ></li>
+            <li><img src="hand3L.png" id="hand3L" ></li>
+            <li><img src="hand3R.png" id="hand3R" ></li> 
+            <li><img src="feet1L.png" id="feet1L" ></li>
+            <li><img src="feet1R.png" id="feet1R" ></li> 
+            <li><img src="feet2L.png" id="feet2L" ></li>
+            <li><img src="feet2R.png" id="feet2R" ></li>
+            <li><img src="feet3L.png" id="feet3L" ></li>           
+            <li><img src="feet3R.png" id="feet3R" ></li>
+        </ul>
+        <div id="viewer">
+            <h3>View Your Monster</h3>
+        </div>
+        
+        <script>
+            var x=''
+            var pp=''
+            var images=[]
+            function func1(){
+                x=document.getElementById("dname").value;
+                $.ajax({
+                    type: 'POST',
+                    url: 'retrive.pl',
+                    data: {"r":x},
+                    success: function(res) {
+                        pp=res
+                },
+                error: function() {alert("did not work");}                  
+                })
+                console.log('\n')
+                pp=pp.split(',')[1]
+                parser = new DOMParser();
+                xmlDoc = parser.parseFromString(pp,"text/xml");
+                console.log("xml")
+                console.log(xmlDoc)
+                var b=document.getElementById("viewer");
+                var x1=b.getBoundingClientRect().left;
+                var y1=b.getBoundingClientRect().top;
+                console.log(xmlDoc.getElementsByTagName("images")[0]);
+                var rr= xmlDoc.getElementsByTagName("images")
+                Array.from(rr).forEach(element => {
+                    id=element.childNodes[1].textContent.split('.')[0]
+                    x=parseFloat(element.childNodes[3].textContent)
+                    y=parseFloat(element.childNodes[5].textContent)
+                    console.log(id,x,y)
+                    var ele=document.getElementById(id)
+                    ele.style.display="inline";
+                    ele.style.position = "absolute"; 
+                    ele.style.left = (x1+x) + 'px'; 
+                    ele.style.top = (y1+y) + 'px';
+                    
+                });
+
+            }
+
+        </script>
+    </body>
+</html>
