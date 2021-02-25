@@ -4,6 +4,12 @@
         <title></title>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src='http://use.edgefonts.net/butcherman.js'></script>
+        <script src='http://use.edgefonts.net/eater.js'></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+        <link href='https://fonts.googleapis.com/css?family=Creepster' rel='stylesheet'> 
+        <script src='http://use.edgefonts.net/flavors.js'></script>
         <style>
             body{
                 background-image: url('https://www.intofilm.org/intofilm-production/3755/scaledcropped/1096x548/resources/3755/a-monster-calls-ep-apaches-entertainment.jpg');
@@ -19,33 +25,52 @@
             li{
                 list-style-type: none;
             }
+            button{
+                margin: 10px;
+                background-color:lightseagreen;
+                color: #141414;
+                font-style: italic;
+                font-size: 16px;
+                box-shadow: 0 0 15px 10px #141414;
+            }
+            button :hover{
+                cursor:pointer;
+                
+            }
             #viewer{
                 width:900px;
                 height:900px;
                 margin:auto;
                 text-align: center;
-                border: 5px solid red; 
-                background-color: black;
-                color: aqua;
+                box-shadow:0 0 15px 10px #141414;
+                font-family:'Creepster';
+                color:red;
+                font-size: xx-large ;
+                margin-bottom: 50px;
+                box-shadow:0em;
             }
             #ff{
                 width: auto;
                 height: auto;
                 text-align: center;
-                background-color: blue;
+                color: blue;
+                font-size: xx-large ;
+                margin-bottom: 50px;
+                box-shadow:0em;
+                font-family:'Creepster';
             }
         </style>
     </head>
     <body>
         <div id="ff">
-            <label for="name">Design Name</label><br>
+            <label for="name">Enter Monster Name</label><br>
             <input type="text" id="dname" name="dname"><br>
             <button type="button" onclick="func1()">Submit</button>
         </div>
         <ul>
-            <li><img src="head1.jpg"  id="head1"></li>
-            <li><img src="head2.jpg"  id="head2"></li>
-            <li><img src="head3.jpg"  id="head3"></li>
+            <li><img src="head1.png"  id="head1"></li>
+            <li><img src="head2.png"  id="head2"></li>
+            <li><img src="head3.png"  id="head3"></li>
             <li><img src="body1.PNG"  id="body1"></li>
             <li><img src="body2.PNG"  id="body2"></li>
             <li><img src="hand1L.png" id="hand1L" ></li>
@@ -62,7 +87,7 @@
             <li><img src="feet3R.png" id="feet3R" ></li>
         </ul>
         <div id="viewer">
-            <h3>View Your Monster</h3>
+            <h3>View Your Creation</h3>
         </div>
         
         <script>

@@ -4,8 +4,11 @@
     <head>
         <title>Editor</title>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src='http://use.edgefonts.net/butcherman.js'></script>
+        <script src='http://use.edgefonts.net/eater.js'></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
-            
+        <link href='https://fonts.googleapis.com/css?family=Creepster' rel='stylesheet'> 
+        <script src='http://use.edgefonts.net/flavors.js'></script>
         <style>
             ul { color: white; list-style-type:none}
             li{float: left;}
@@ -15,26 +18,30 @@
                 margin: auto;
                 height: 1400px;
                 margin: auto;
-                background-color:black;
-                color: aqua;
+                
                 padding: 10px;
                 overflow:hidden;
             }
             body{
-                background-image: url("https://www.imore.com/sites/imore.com/files/styles/large/public/field/image/2020/12/monster-hunter-rise-rampage.jpg");
+                background-image: url("https://images7.alphacoders.com/677/677759.jpg");
                 background-repeat: no-repeat;
                 background-size: cover;
             }
             .head{
                 width:90%;
                 height:40%;
-                border: 2px solid black;
                 margin: auto;
                 text-align: center;
-                border: 5px solid red;
+                font-family:'Creepster';
+                color:red;
+                font-size: large;
                 margin-bottom: 50px;
+                box-shadow:0em;
                 
 
+            }
+            .head h1{
+                color:purple;
             }
             .flexx{
                 display: flex;
@@ -46,49 +53,76 @@
                 height:50%;
                 margin:auto;
                 text-align: center;
-                border: 5px solid red; 
+                border: 1px solid black; 
+                font-family:'Eater';
+                color:yellow;
+                background-image: url("https://i.pinimg.com/originals/dc/3a/7b/dc3a7bcb01f5990bdf10af6ad2a08a04.jpg");
+                font-size: xx-large;
+                background-size: cover;
                 height: 50%;
+                box-shadow: 0 0 15px 10px #141414;
             }
             #Head{      
                 width: 22%;
-                border: 5px solid yellow;
+                background-image: url("https://i.pinimg.com/474x/ba/d2/10/bad210a91ac2d87911359aab80afc2b3.jpg");
+                background-size: cover;
+                border-radius: 10%;
                 margin:10px;
+                box-shadow: 0 0 15px 10px #141414;
            
             }
             #Body{
                 width: 22%;
-                border: 5px solid yellow;
+                background-image: url("https://i.pinimg.com/474x/ba/d2/10/bad210a91ac2d87911359aab80afc2b3.jpg");
+                background-size: cover;
+                border-radius: 10%;
                 margin:10px;
+                box-shadow: 0 0 15px 10px #141414;
             
 
             }
             #Hands{
                 width: 22%;
-                border: 5px solid yellow;
+                background-image: url("https://i.pinimg.com/474x/ba/d2/10/bad210a91ac2d87911359aab80afc2b3.jpg");
+                background-size: cover;
+                border-radius: 10%;
                 margin:10px;
+                box-shadow: 0 0 15px 10px #141414;
                
 
             }
             #Foots{
                 width: 22%;
-                border: 5px solid yellow;
+                background-image: url("https://i.pinimg.com/474x/ba/d2/10/bad210a91ac2d87911359aab80afc2b3.jpg");
+                background-size: cover;
+                border-radius: 10%;
                 margin:10px;
-                padding: 10px;
+                box-shadow: 0 0 15px 10px #141414;
                 
 
             }
             #footer{
                 text-align: center;
-                width: 30%;
+                width: 60%;
                 margin: auto;
                 display: flex;
                 margin-top: 15px;
+                margin-bottom: 15px;
+                color:red;
+                font-family: 'Flavors';
+                font-size: x-large;
             }
             button{
                 margin: 10px;
+                background-color: red;
+                color: #141414;
+                font-style: italic;
+                font-size: 16px;
+                box-shadow: 0 0 15px 10px #141414;
             }
             button :hover{
                 cursor:pointer;
+                background-color: rgb(37, 14, 14);
             }
             img {
                 width: 100px;
@@ -107,7 +141,7 @@
     <body>
         <div class="palette">
             <div class="head">
-                <h2>Monster Palette</h2><br>
+                <h1>Monster Palette</h1><br>
             <div class="flexx">
                 
                 <div id="Head">
@@ -151,13 +185,13 @@
                 
             </div>
             <div class="board">
-                <h2>Drawing Area</h2>
+                <h2>Invent Your Monster!!</h2>
             </div>
             <div id="footer">
-            <label>Enter the design Name</label>
+            <label>Enter the name of your creation!!</label>
             <input type="text" id="Design_Name"></input>
-            <button type="button" onclick="FinalSaving()" >Save</button>
-            <button type="button" onclick="PerlSubmit()">Submit</button>
+            <button type="button" onclick="FinalSaving()"  >Save</button>
+            <button type="button" onclick="PerlSubmit()" >Submit</button>
             </div>
         </div>
         
