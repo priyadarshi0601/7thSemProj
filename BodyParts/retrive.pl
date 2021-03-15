@@ -12,8 +12,8 @@ my $port = 3377;
 #print $cgi->header('application/json;charset=UTF-8');
 my $q = new CGI;
 my $id = $q->param('r');
-my $dbh = DBI->connect("DBI:mysql:monster;localhost;port=$port", "root", "");
-my $sth = $dbh->prepare("Select * from parts where ID = '$id'");
+my $dbh = DBI->connect("DBI:mysql:mixer;localhost;port=$port", "root", "");
+my $sth = $dbh->prepare("Select * from bodyparts where ID = '$id'");
 my $rows = $sth->execute();
 if ($rows >= 1)
 {
