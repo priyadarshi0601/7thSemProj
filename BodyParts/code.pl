@@ -20,8 +20,8 @@ $id= $id1->{monster}[0]->{design_id}[0];
 print $id;
 my $xml = XMLout($id1);
 print $xml;
-my $dbh = DBI->connect("DBI:mysql:monster;localhost;port=$port", "root", "");
-my $sth = $dbh->prepare("Select * from parts where ID = '$id'");
+my $dbh = DBI->connect("DBI:mysql:mixer;localhost;port=$port", "root", "");
+my $sth = $dbh->prepare("Select * from bodyparts where ID = '$id'");
 my $rows = $sth->execute();
 if ($rows >= 1)
 {
@@ -29,7 +29,7 @@ if ($rows >= 1)
 }
 else
 {
-	$sth = $dbh->prepare("INSERT into parts values('$id', '$xml')");
+	$sth = $dbh->prepare("INSERT into bodyparts values('$id', '$xml')");
 	$sth->execute(); 
 	print "XML Data inserted successfully!";
 }
